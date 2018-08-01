@@ -31,8 +31,10 @@ character_array += get_characters
 
 
 character_array.each do |character|
-  character.each do |next_level|
-  Character.create(name: character["name"] url: character["url"])
+  Character.create(name: character["name"], url: character["url"],
+    gender: character["gender"], culture: character["culture"], born: character["born"],
+  died: character["died"], father: character["father"], mother: character["mother"],
+spouse: character["spouse"], actor: character["playedBy"])
 end
 
 # binding.pry
