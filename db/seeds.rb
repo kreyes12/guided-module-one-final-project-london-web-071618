@@ -29,12 +29,20 @@ end
 character_array = []
 character_array += get_characters
 
-  def get_books
-    books_url = "https://anapioficeandfire.com/api/books/?page=1&pageSize=50"
-    uri = URI(url)
-    response = Net::HTTP.get(uri)
-    books_array = JSON.parse(response)
-    books += books_array
+
+character_array.each do |character|
+  Character.create(name: character["name"], url: character["url"],
+    gender: character["gender"], culture: character["culture"], born: character["born"],
+  died: character["died"], father: character["father"], mother: character["mother"],
+spouse: character["spouse"], actor: character["playedBy"])
+end
+
+def get_books
+  books_url = "https://anapioficeandfire.com/api/books/?page=1&pageSize=50"
+  uri = URI(url)
+  response = Net::HTTP.get(uri)
+  books_array = JSON.parse(response)
+  books += books_array
 end
 
 book_array = []
