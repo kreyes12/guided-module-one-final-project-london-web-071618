@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180801092638) do
+ActiveRecord::Schema.define(version: 20180801151636) do
 
   create_table "books", force: :cascade do |t|
     t.string   "name"
@@ -23,20 +23,16 @@ ActiveRecord::Schema.define(version: 20180801092638) do
   end
 
   create_table "characters", force: :cascade do |t|
-    t.string  "name"
-    t.string  "gender"
-    t.string  "culture"
-    t.string  "born"
-    t.string  "died"
-    t.string  "titles"
-    t.string  "aliases"
-    t.string  "father"
-    t.string  "mother"
-    t.string  "spouse"
-    t.integer "house_id"
-    t.integer "books_id"
-    t.index ["books_id"], name: "index_characters_on_books_id"
-    t.index ["house_id"], name: "index_characters_on_house_id"
+    t.string "url"
+    t.string "name"
+    t.string "gender"
+    t.string "culture"
+    t.string "born"
+    t.string "died"
+    t.string "father"
+    t.string "mother"
+    t.string "spouse"
+    t.string "actor"
   end
 
 end

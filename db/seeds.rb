@@ -15,16 +15,25 @@ def get_characters
 
 
   while i <= 43
+    i += 1
     url = "https://anapioficeandfire.com/api/characters/?page=#{i}&pageSize"
     uri = URI(url)
     response = Net::HTTP.get(uri)
     characters_array = JSON.parse(response)
     characters += characters_array
-    i += 1
   end
 
-  p characters
+  characters
 end
 
+character_array = []
+character_array += get_characters
 
-get_characters
+
+character_array.each do |character|
+  character.each do |next_level|
+  Character.create(name: character["name"] url: character["url"])
+end
+
+# binding.pry
+# 0
