@@ -15,8 +15,8 @@ def get_characters
 
 
   while i <= 43
-    i += 1
     url = "https://anapioficeandfire.com/api/characters/?page=#{i}&pageSize"
+    i += 1
     uri = URI(url)
     response = Net::HTTP.get(uri)
     characters_array = JSON.parse(response)
@@ -55,8 +55,8 @@ def get_houses
   houses = []
 
   while i < 9
+    house_url = 'https://anapioficeandfire.com/api/houses/?page=#{i}&pageSize=50'
     i += 1
-    house_url = 'https://anapioficeandfire.com/api/houses/?page=1&pageSize=50'
     uri = URI(house_url)
     response = Net::HTTP.get(uri)
     house_array = JSON.parse(response)
