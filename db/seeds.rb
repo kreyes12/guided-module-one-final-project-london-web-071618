@@ -31,10 +31,13 @@ character_array += get_characters
 
 
 character_array.each do |character|
+
   Character.create(name: character["name"], url: character["url"],
     gender: character["gender"], culture: character["culture"], born: character["born"],
   died: character["died"], father: character["father"], mother: character["mother"],
-spouse: character["spouse"], actor: character["playedBy"])
+spouse: character["spouse"], actor: character["playedBy"], house: character["allegiances"],
+tv_season: character["tvSeries"], books: character["books"],
+character_url_id: character["url"].split(/\//).last(1).join.to_i)
 end
 
 def get_books
@@ -61,7 +64,7 @@ def get_houses
   houses = []
 
   while i < 9
-    house_url = 'https://anapioficeandfire.com/api/houses/?page=#{i}&pageSize=50'
+    house_url = "https://anapioficeandfire.com/api/houses/?page=#{i}&pageSize=50"
     i += 1
     uri = URI(house_url)
     response = Net::HTTP.get(uri)
