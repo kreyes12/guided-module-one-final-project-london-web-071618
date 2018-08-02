@@ -95,12 +95,9 @@ end
 
 def get_book_characters
 
-
-
-
-
-
 end
+
+
 
 get_characters
 get_books
