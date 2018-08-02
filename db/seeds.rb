@@ -49,12 +49,38 @@ end
 book_array = []
 book_array += get_books
 
+
 book_array.each do |book|
   Book.create(url: book["url"], name: book["name"], isbn: book["isbn"], number_of_pages: book["numberOfPages"], publisher: book["publisher"], country: book["country"], mediatype: book["mediaType"], released: book["released"], characters: book["characters"])
 end
 
 
+def get_houses
 
+  i = 1
+  houses = []
+
+  while i < 9
+    i += 1
+    house_url = 'https://anapioficeandfire.com/api/houses/?page=1&pageSize=50'
+    uri = URI(house_url)
+    response = Net::HTTP.get(uri)
+    house_array = JSON.parse(response)
+    houses += house_array
+  end
+  houses
+end
+
+house_array = []
+house_array += get_houses
+
+house_array.each do |house|
+  House.create(url: house["url"], name: house["name"], region: house["region"],
+    coat_of_arms: house["coatOfArms"], motto: house["words"], current_lord: house["currentLord"],
+    heir: house["heir"], overlord: house["overlord"], founded: house["founded"], founder: house["founder"],
+    extinct:house["diedOut"])
+end
 
 get_characters
 get_books
+get_houses
