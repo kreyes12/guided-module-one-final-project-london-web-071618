@@ -31,13 +31,18 @@ character_array += get_characters
 
 
 character_array.each do |character|
+  character["books"].each do |book_url|
+    BookCharacter.create(book_url: book_url)
+  end
+  # character["characters"].each do |character_url|
+  #   BookCharacter.create(character_url: character_url)
+
 
   Character.create(name: character["name"], url: character["url"],
     gender: character["gender"], culture: character["culture"], born: character["born"],
   died: character["died"], father: character["father"], mother: character["mother"],
 spouse: character["spouse"], actor: character["playedBy"], house: character["allegiances"],
-tv_season: character["tvSeries"], books: character["books"],
-character_url_id: character["url"].split(/\//).last(1).join.to_i)
+tv_season: character["tvSeries"], books: character["books"])
 end
 
 def get_books
@@ -54,6 +59,10 @@ book_array += get_books
 
 
 book_array.each do |book|
+  book["characters"].map do |character_url|
+    binding.pry
+    BookCharacter.create(character_url: character_url)
+  end
   Book.create(url: book["url"], name: book["name"], isbn: book["isbn"], number_of_pages: book["numberOfPages"], publisher: book["publisher"], country: book["country"], mediatype: book["mediaType"], released: book["released"], characters: book["characters"])
 end
 
@@ -82,6 +91,15 @@ house_array.each do |house|
     coat_of_arms: house["coatOfArms"], motto: house["words"], current_lord: house["currentLord"],
     heir: house["heir"], overlord: house["overlord"], founded: house["founded"], founder: house["founder"],
     extinct:house["diedOut"])
+end
+
+def get_book_characters
+
+
+
+
+
+
 end
 
 get_characters
