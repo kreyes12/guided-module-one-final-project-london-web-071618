@@ -31,6 +31,7 @@ def get_characters
   characters
 end
 
+def create_character
 character_array = []
 character_array += get_characters
 
@@ -43,11 +44,15 @@ character_array.each do |character|
   #   BookCharacter.create(character_url: character_url)
 
 
-  Character.create(name: character["name"], url: character["url"],
+    a_character = Character.create(name: character["name"], url: character["url"],
     gender: character["gender"], culture: character["culture"], born: character["born"],
-  died: character["died"], father: character["father"], mother: character["mother"],
-spouse: character["spouse"], actor: character["playedBy"], allegiance: character["allegiances"],
-tv_season: character["tvSeries"], books: character["books"])
+    died: character["died"], father: character["father"], mother: character["mother"],
+    spouse: character["spouse"], actor: character["playedBy"], tv_season: character["tvSeries"])
+
+character_house = House.find_by(url: character["allegiances"].first)
+a_character.house = character_house
+a_character.save
+end
 end
 
 def get_books
@@ -65,7 +70,6 @@ book_array += get_books
 
 book_array.each do |book|
   #book["characters"].map do |character_url|
-    binding.pry
     #BookCharacter.create(character_url: character_url)
 #  end
   Book.create(url: book["url"], name: book["name"], isbn: book["isbn"], number_of_pages: book["numberOfPages"], publisher: book["publisher"], country: book["country"], mediatype: book["mediaType"], released: book["released"])
@@ -107,3 +111,4 @@ end
 get_books
 get_houses
 #get_characters
+create_character
