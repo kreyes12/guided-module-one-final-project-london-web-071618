@@ -2,6 +2,11 @@ require 'json'
 require 'net/http'
 require "pry"
 
+Book.destroy_all
+House.destroy_all
+Character.destroy_all
+BookCharacter.destroy_all
+
 def get_characters
   # url = 'https://anapioficeandfire.com/api/characters/?page=2&pageSize=50'
   # uri = URI(url)
@@ -31,9 +36,9 @@ character_array += get_characters
 
 
 character_array.each do |character|
-  character["books"].each do |book_url|
-    BookCharacter.create(book_url: book_url)
-  end
+  #character["books"].each do |book_url|
+    #BookCharacter.create(book_id: )
+  #end
   # character["characters"].each do |character_url|
   #   BookCharacter.create(character_url: character_url)
 
@@ -41,7 +46,7 @@ character_array.each do |character|
   Character.create(name: character["name"], url: character["url"],
     gender: character["gender"], culture: character["culture"], born: character["born"],
   died: character["died"], father: character["father"], mother: character["mother"],
-spouse: character["spouse"], actor: character["playedBy"], house: character["allegiances"],
+spouse: character["spouse"], actor: character["playedBy"], allegiance: character["allegiances"],
 tv_season: character["tvSeries"], books: character["books"])
 end
 
@@ -59,11 +64,11 @@ book_array += get_books
 
 
 book_array.each do |book|
-  book["characters"].map do |character_url|
+  #book["characters"].map do |character_url|
     binding.pry
-    BookCharacter.create(character_url: character_url)
-  end
-  Book.create(url: book["url"], name: book["name"], isbn: book["isbn"], number_of_pages: book["numberOfPages"], publisher: book["publisher"], country: book["country"], mediatype: book["mediaType"], released: book["released"], characters: book["characters"])
+    #BookCharacter.create(character_url: character_url)
+#  end
+  Book.create(url: book["url"], name: book["name"], isbn: book["isbn"], number_of_pages: book["numberOfPages"], publisher: book["publisher"], country: book["country"], mediatype: book["mediaType"], released: book["released"])
 end
 
 
@@ -99,6 +104,6 @@ end
 
 
 
-get_characters
 get_books
 get_houses
+#get_characters
