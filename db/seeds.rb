@@ -52,6 +52,13 @@ character_array.each do |character|
 character_house = House.find_by(url: character["allegiances"].first)
 a_character.house = character_house
 a_character.save
+
+character_book = Book.find_by(url: character["books"])
+if character_book != nil
+a_character.books << character_book
+a_character.save
+end
+
 end
 end
 
